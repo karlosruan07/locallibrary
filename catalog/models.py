@@ -7,8 +7,15 @@ import uuid # Required for unique book instances
 class Genre(models.Model):
     name = models.CharField(max_length=200, help_text='Digite o genero do livro')
 
-def __str__(self):#nome que aparecerá nos model
-    return self.name
+    def __str__(self):#nome que aparecerá nos model
+        return self.name
+
+
+class BookIdioma(models.Model):
+    idioma = models.CharField('Idioma', max_length=50)
+
+    def __str__(self):
+        return f'{self.idioma}'
 
 
 class Book(models.Model):
@@ -25,6 +32,7 @@ class Book(models.Model):
     # ManyToManyField used because genre can contain many books. Books can cover many genres.
     # Genre class has already been defined so we can specify the object above.
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
+    idioma_of_book = models.ForeignKey(BookIdioma, on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         """String for representing the Model object."""
