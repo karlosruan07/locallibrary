@@ -1,0 +1,217 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <!-- INICIO DO TITLE -->
+    <title>{% block title %} Local Library {% endblock %}</title>
+    <!-- FIM DO TITLE -->
+
+</head>
+
+<body>
+    <!--INICIO DO HEADER-->
+
+
+    <header>
+        {% block navbar %}
+        <!-- INICIO DO MENU MOBILE -->
+
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="{% static 'img/moldura_mobile.jpg' %}">
+                    </div>
+                    <a href="#user"><img class="circle" src="{% static 'img/avatar_femenino.png' %}"></a>
+                    <a href="#name"><span class="white-text name">Ana Maria</span></a>
+                    <a href="#email"><span class="white-text email">anamaria@gmail.com</span></a>
+                </div>
+            </li>
+            <li><a href="#"><i class="material-icons">description</i>Alterar
+                    Dados</a></li>
+            <li><a href="#"><i class="material-icons">password</i>Alterar Senha</a></li>
+            <li><a href="#"><i class="material-icons">lock</i>Esqueci Minha Senha</a></li>
+            <li><a href="#"><i class="material-icons">login</i>Entrar</a></li>
+            <li><a href="#"><i class="material-icons">logout</i>Sair</a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a class="subheader">Informações Adicionais</a></li>
+        </ul>
+
+        <!-- FIM DO MENU MOBILE -->
+
+        <!-- INICIO DA NAVBAR -->
+        <div class="navbar-fixed">
+            <nav class="black z-depth-3">
+                <div class="nav-wrapper container">
+                    <a href="{% url 'index' %}" class="brand-logo"><img src="{% static 'img/logo.png' %}" alt=""
+                            height="60px"></a>
+
+                    <a href="#" class="right hide-on-large-only"><i class="material-icons">shopping_cart</i></a>
+
+
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons"
+                            style="color: purple;">menu</i></a>
+
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="{% url 'index' %}" class="purple-text"><i
+                                    class="material-icons left">home</i>INÍCIO</a></li>
+
+                        <li><a href="#" class="purple-text"><i class="material-icons left">shopping_cart</i>MEU
+                                CARRINHO</a></li>
+
+                        <li><a href="#" class="purple-text"><i class="material-icons left">contacts</i> CONTATO</a>
+                        </li>
+                        <li><a href="#" class="purple-text"><i class="material-icons left">info</i> SOBRE</a></li>
+                        <li><a href="#" class="black-text purple dropdown-trigger btn" data-target='dropdown1'><i
+                                    class="material-icons left">face</i>MINHA CONTA <i
+                                    class="material-icons left">expand_more</i></a>
+                        </li>
+
+                        <ul id='dropdown1' class='dropdown-content'>
+                            <li><a href="#">ADICIONAR POST</a></li>
+                            <li class="divider" tabindex="-1"></li>
+                            <li><a href="#">ENTRAR</a></li>
+
+                        </ul>
+
+                    </ul>
+                </div>
+            </nav>
+
+            <ul id='dropdown2' class='dropdown-content'>
+                <li><a href="#">ADICIONAR POST</a></li>
+                <li class="divider" tabindex="-1"></li>
+                <li><a href="#">ENTRAR</a></li>
+            </ul>
+            <div class="divider purple"></div>
+        </div>
+        {% endblock %}
+    </header>
+
+    <!--FIM DO HEADER-->
+
+    <!--INICIO DO MAIN-->
+
+    <main class="container">
+
+        <h1 class="center title">Local library !!</h1>
+
+        {% block category %}
+
+        <h4 class="title center">Navegue pelas nossas categorias !</h4>
+
+
+        {% for category in categories %}
+
+        <div class="chip">
+
+            <a href="#">{{ category }}</a>
+
+        </div>
+
+        {% endfor %}
+        <br>
+        
+        {% endblock %}
+
+        <div class="row">
+            <div class="col s12 m9 l10">
+
+                {% block content %}
+
+                {% endblock %}
+
+            </div>
+            <div class="col m3 l2">
+                <ul class="section">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'all-books' %}">Todos os livros</a></li>
+            
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <!--FIM DO MAIN-->
+
+    <!--INICIO DO FOOTER-->
+    <section>
+        {% block footer %}
+        <footer class="page-footer black">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <div><a href="#!"><img class="brand-logo z-depth-5" src="{% static 'img/logo.png' %}" alt="logo"
+                                    height="60"></a></div>
+                        <div>
+                            <p class="lighten-1 purple-text" style="text-align: justify;">Projeto feito com o objetivo
+                                de postar artigos no blog,
+                                o mesmo tem as principais funções que um sistema WEB pode oferecer para o usuário como :
+                                criar, visualizar, editar e deletar os posts.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider purple"></div>
+
+                <div class="row">
+                    <div class="col s6">
+                        <h6 class="purple-text"><strong>CONTATOS</strong></h6>
+                        <ul>
+                            <li><a class="purple-text text-lighten-3" href="#!">teste@gmail.com</a></li>
+                            <li><a class="purple-text text-lighten-3" href="#!">+55 093 xxxxx-xxxx</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col s6">
+                        <h6 class="purple-text"><strong>SIGA-NOS NAS REDES SOCIAIS</strong></h6>
+
+                        <div class="row">
+                            <div class="col s4">
+                                <img src="{% static 'img/facebook_.png' %}" alt="50px" width="50px">
+                            </div>
+
+                            <div class="col s4">
+                                <img src="{% static 'img/instagram_.png' %}" alt="50px" width="50px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="divider white"></div>
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="center purple-text">
+                        © 2021 - Todos os direitos reservados.
+                    </div>
+                </div>
+            </div>
+        </footer>
+        {% endblock %}
+    </section>
+    <!--FIM DO FOOTER-->
+
+</body>
+
+<script src="{% static 'js/materialize.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+{% block script %}
+
+{% endblock %}
+
+</html>
