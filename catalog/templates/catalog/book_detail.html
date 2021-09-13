@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block category %} {% endblock %}
+
+{% block content %}
+
+<div class="card z-depth-3">
+    <div class="card-content">
+        <span class="card-title center">{{ book.title }}</span>
+        <p> <strong>Author : </strong> {{ book.author }}</p>
+        <p>{{ book.summary }}</p>
+        <p><strong>ISBN : </strong> {{ book.isbn }} </p>
+        <p><strong>Genre : </strong> {% for genre in book.genre.all %} {{ genre }} {% if not forloop.last %}, {% else %}. {% endif %}  {% endfor %}</p>
+        <p><strong>Idioma : </strong> {{ book.idioma_of_book }} </p>
+
+
+        {% for copy in book.bookinstance_set.all %} <!-- book.bookinstance_set.all é construido automaticamente pelo djago para detectar um relacionamento entre tabelas -->
+
+        <hr>
+        <p>{% if copy.status != 'a' %} <strong>status :</strong> {{ copy.get_status_display }}
+            <i class="material-icons" style="color: red;">watch_later</i>
+            <p><strong>Data para retorno :</strong> {{ copy.due_back }}</p>
+            
+            {% elif copy.status == 'a' %}
+        
+            <strong>status :</strong>  {{ copy.get_status_display }} <i class="material-icons" style="color: green;">done</i>
+
+            {% endif %} </p>
+
+            <p><strong>Imprint : </strong> {{ copy.imprint }} </p>
+
+            <p><strong>Id : </strong> {{ copy.id }} </p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

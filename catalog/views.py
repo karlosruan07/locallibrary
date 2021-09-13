@@ -1,7 +1,12 @@
 
 from django.shortcuts import render
+from django.http import Http404
 
 from .models import Book, BookInstance, BookIdioma, Author, Genre
+
+from django.views import generic
+
+from catalog import models
 
 def index(request):
 
@@ -17,10 +22,25 @@ def index(request):
         "num_instance_available" : num_instance_available,
         "num_author" : num_author
     }
-    return render(request, 'base.html')
+    return render(request, 'catalog/index.html', context=contexto)
 
 
-def all_books(request):
-    num_book = Book.objects.all().count()
-    contexto = {"num_book":num_book}
-    return render(request, 'catalog/books.html',context=contexto)
+class BookListView(generic.ListView):
+    model = Book
+    paginate_by = 2
+
+    def get_context_data(self, **kwargs):
+        context = super(BookListView, self).get_context_data(**kwargs)#obtem o contexto existente da superclasse.
+        context['info'] = 'info'#adicionando mais informações no contexto
+        return context #retornando o contexto atualizado, isso é obrigatório
+
+
+class BookDetailView(generic.DetailView):
+    model = Book
+    context_object_name = 'book'
+
+    def get_context_data(self, **kwargs):
+        context = super(BookDetailView, self).get_context_data(**kwargs)
+        context['info'] = 'info'
+        return context
+
