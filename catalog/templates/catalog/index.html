@@ -6,12 +6,14 @@
 
 {% block content %}
 <div class="center card">
-    <h3 class="card-title">Bem-vindo a LocalLibrary !!</h3>
     <div class="card-content">
         <h4>Livros : {{ num_book }}</h4>
         <h4>Cópias : {{ num_instance }}</h4>
         <h4>Cópias disponíveis : {{ num_instance_available }}</h4>
         <h4>Autores : {{num_author}}</h4>
+        <br>
+        <h4>Número de visitas : {{ num_visitas }}</h4>
+
     </div>
 </div>
 {% endblock %}
